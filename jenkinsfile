@@ -1,12 +1,27 @@
 pipeline {
     agent any
     environment {
-       REPO_URL="https://github.com/vinodkumarbotta/spring-boot-hello-world.git"
+       REPO_URL="https://github.com/vinodkumarbotta/jenkinsfile.git"
     }
     stages{
-        stage("build stage"){
+       
+        stage("build code"){
             steps{
-            echo "build this stage"
+                script{
+                    sh """
+                    ls -lrt
+                    mvn install
+                    """
+                }
+            }
+        }
+        stage("Run Unit Test"){
+            steps{
+                script {
+                    sh """
+                    mvn test
+                    """
+                }
             }
         }
     }
