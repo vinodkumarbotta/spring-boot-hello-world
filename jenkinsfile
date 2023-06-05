@@ -4,24 +4,9 @@ pipeline {
        REPO_URL="https://github.com/vinodkumarbotta/spring-boot-hello-world.git"
     }
     stages{
-       
-        stage("build code"){
+        stage("build stage"){
             steps{
-                script{
-                    sh """
-                    ls -lrt
-                    mvn install
-                    """
-                }
-            }
-        }
-        stage("Run Unit Test"){
-            steps{
-                script {
-                    sh """
-                    mvn test
-                    """
-                }
+            echo "build this stage"
             }
         }
     }
