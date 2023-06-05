@@ -1,25 +1,27 @@
-pipeline{
-    
+pipeline {
     agent any
+    environment {
+       REPO_URL="https://github.com/vinodkumarbotta/spring-boot-hello-world.git"
+    }
     stages{
-        stage("Build stage"){
+       
+        stage("build code"){
             steps{
-                echo 'build this stage'
+                script{
+                    sh """
+                    ls -lrt
+                    mvn install
+                    """
+                }
             }
         }
-        stage("test stage"){
+        stage("Run Unit Test"){
             steps{
-                echo 'test this stage'
-            }
-        }
-        stage("test analysing stage"){
-            steps{
-                echo 'test analysing this stage'
-            }
-        }
-        stage("deployment stage"){
-            steps{
-                echo 'deployment this stage'
+                script {
+                    sh """
+                    mvn test
+                    """
+                }
             }
         }
     }
