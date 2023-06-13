@@ -24,5 +24,12 @@ pipeline {
                 }
             }
         }
+        stage("Code Analysis"){
+            steps {
+                withSonarQubeEnv('vinod-sonarqube') {
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=springbootapp -Dsonar.projectName=SpringApp -Dsonar.sources=. -Dsonar.java.binaries=target/classes -Dsonar.sourceEncoding=UTF-8"
+                }
+            }
+        }
     }
 }
