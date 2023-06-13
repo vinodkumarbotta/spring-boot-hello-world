@@ -27,7 +27,7 @@ pipeline {
         stage("Code Analysis"){
             steps {
                 withSonarQubeEnv('vinod-sonarqube') {
-                    sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=./myproject.properties"
+                    sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=./vinod.properties"
                 }
             }
         }
