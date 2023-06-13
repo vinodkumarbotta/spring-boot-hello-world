@@ -1,6 +1,8 @@
 pipeline {
     agent any
-    
+    environment {
+        def scannerHome = tool 'sonarqube-vinod'
+    }
     stages{
        
         stage("build code"){
@@ -25,7 +27,7 @@ pipeline {
         stage("Code Analysis"){
             steps {
                 withSonarQubeEnv('vinod-sonarqube') {
-                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=springbootapp -Dsonar.projectName=SpringApp -Dsonar.sources=. -Dsonar.java.binaries=target/classes -Dsonar.sourceEncoding=UTF-8"
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=app-test -Dsonar.projectName=app-test-proj -Dsonar.sources=. -Dsonar.java.binaries=target/classes -Dsonar.sourceEncoding=UTF-8"
                 }
             }
         }
