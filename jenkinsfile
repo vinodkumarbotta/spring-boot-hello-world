@@ -33,41 +33,41 @@ pipeline {
         }
         stage("Quality Gate") {
             steps {
-                timeout(time: 5, unit: 'MINUTES') {
+                timeout(time: 1, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }
             }
         }
-        stage("Upload Artifacts"){
-            steps{
+        // stage("Upload Artifacts"){
+        //     steps{
                 
-                rtServer (
-                        id: 'jfrog-artifactory',
-                        url: 'http://3.113.33.247:8082/artifactory/',
-                        // If you're using username and password:
-                        username: 'admin',
-                        password: 'Vinod@123',
-                        // If you're using Credentials ID:
-                        // credentialsId: 'ccrreeddeennttiiaall',
-                        // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
-                        // bypassProxy: true,
-                        // Configure the connection timeout (in seconds).
-                        // The default value (if not configured) is 300 seconds: 
-                        timeout: 300
-                )
-                rtUpload (
-                    serverId: 'jfrog-artifactory',
-                    spec: '''{
-                        "files": [
-                            {
-                            "pattern": "target/*.jar",
-                            "target": "example-repo-local/spring-boot-hello-world/"
-                            }
-                        ]
-                    }''',
-                )    
-            }
-        } 
+        //         rtServer (
+        //                 id: 'jfrog-artifactory',
+        //                 url: 'http://3.113.33.247:8082/artifactory/',
+        //                 // If you're using username and password:
+        //                 username: 'admin',
+        //                 password: 'Vinod@123',
+        //                 // If you're using Credentials ID:
+        //                 // credentialsId: 'ccrreeddeennttiiaall',
+        //                 // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
+        //                 // bypassProxy: true,
+        //                 // Configure the connection timeout (in seconds).
+        //                 // The default value (if not configured) is 300 seconds: 
+        //                 timeout: 300
+        //         )
+        //         rtUpload (
+        //             serverId: 'jfrog-artifactory',
+        //             spec: '''{
+        //                 "files": [
+        //                     {
+        //                     "pattern": "target/*.jar",
+        //                     "target": "example-repo-local/spring-boot-hello-world/"
+        //                     }
+        //                 ]
+        //             }''',
+        //         )    
+        //     }
+        // } 
     }
     post {
         always {
